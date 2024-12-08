@@ -36,7 +36,9 @@ SECRET_KEY = 'django-insecure-!fxd&kcxj7m-mdhnd06aqoap%umqe(m%^xlvx_x84hs-=a(5&n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '8000-sophiethoms-ecopositive-nmek1gobu21.ws.codeinstitute-ide.net',
+]
 
 
 # Application definition
@@ -50,6 +52,8 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
+
+    'profiles',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +64,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://8000-sophiethoms-ecopositive-nmek1gobu21.ws.codeinstitute-ide.net',
 ]
 
 ROOT_URLCONF = 'drf_api.urls'
