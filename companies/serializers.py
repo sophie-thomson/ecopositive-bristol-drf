@@ -8,6 +8,21 @@ class CompanySerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
 
+    def validate_logo(self, value):
+        if value.size > 1024 * 1024 * 2:
+            raise serializers.ValidationError(
+                'Image size too large, please use an image smaller than 2MB'
+            )
+        if value.image.width > 1500:
+            raise serializers.ValidationError(
+                'Image width must be less than 1500px'
+            )
+        if value.image.height > 1500:
+            raise serializers.ValidationError(
+                'Image height must be less than 1500px'
+            )
+        return value
+
     def get_is_owner(self, obj):
         # context passed to each request in get and put views
         request = self.context['request']

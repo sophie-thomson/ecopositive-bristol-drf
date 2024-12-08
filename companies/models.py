@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class Company(models.Model):
     """
-    Company model.
+    Company model holding the company's listing details
     Default logo set
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
