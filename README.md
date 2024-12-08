@@ -37,3 +37,4 @@ Users are invited to sign up to endorse the companies that they support and comm
 ![EcoPositive Bristol Comments model](docs/readme-images/comments-model-erd.png)
 ![EcoPositive Bristol Credential model](docs/readme-images/credential-model-erd.png)
 ![EcoPositive Bristol Endorse model](docs/readme-images/endorse-model-erd.png)
+![EcoPositive Bristol Favourite model](docs/readme-images/favourite-model-erd.png)
