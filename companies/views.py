@@ -36,3 +36,45 @@ class CompanyList(APIView):
         return Response(
             serializer.errors, status=status.HTTP_400_BAD_REQUEST
         )
+
+class CompanyDetail(APIView):
+    """
+    Retrieve or update a profile if you're the owner.
+    """
+    # creates form for admin editing matching to serializer fields
+    serializer_class = CompanySerializer
+    # Sets the permission classes attribute
+    permission_classes = [IsOwnerOrReadOnly]
+
+    def get_object(self, pk):
+        try:
+            company = Company.objects.get(pk=pk)
+            # Checks permissions before returning an instance
+            self.check_object_permissions(self.request, company)
+            return company
+        except Company.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        company = self.get_object(pk)
+        serializer = CompanySerializer(
+            company, context={'request': request}
+        )
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        company = self.get_object(pk)
+        serializer = CompanySerializer(
+            company, data=request.data, context={'request': request}
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Reponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        company = self.get_object(pk)
+        company.delete()
+        return Response(
+            status=status.HTTP_204_NO_CONTENT
+        )
