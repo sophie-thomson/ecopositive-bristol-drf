@@ -1,4 +1,4 @@
-# EcoPositive Bristol
+# EcoPositive Bristol (Django REST API)
 
 [EcoPositive Bristol](https://tastesensation-pp4-54d01fbc1628.herokuapp.com/) is a one stop directory championing Bristol’s eco-conscious and socially responsible businesses.
 
@@ -38,3 +38,20 @@ Users are invited to sign up to endorse the companies that they support and comm
 ![EcoPositive Bristol Credential model](docs/readme-images/credential-model-erd.png)
 ![EcoPositive Bristol Endorse model](docs/readme-images/endorse-model-erd.png)
 ![EcoPositive Bristol Favourite model](docs/readme-images/favourite-model-erd.png)
+
+## Testing
+
+### Automated Testing
+
+***Companies***
+
+- **CompanyListViewTests**
+  - test_can_list_companies
+  - test_logged_in_user_can_create_company
+  - test_user_not_logged_in_cant_create_company
+
+- **CompanyDetailViewTests**
+  - test_can_retrieve_company_using_valid_id
+  - test_cant_retrieve_company_using_invalid_id
+  - test_user_can_update_own_company
+  - test_user_cant_update_another_users_company
