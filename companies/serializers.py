@@ -43,6 +43,6 @@ class CompanySerializer(serializers.ModelSerializer):
             'description',
             # 'credentials',
             'created_on',
-            'updated_on',  
-            'is_owner',  
+            'updated_on',
+            'is_owner',
         ]

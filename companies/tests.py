@@ -7,7 +7,7 @@ from rest_framework.test import APITestCase
 class CompanyListViewTests(APITestCase):
     def setUp(self):
         User.objects.create_user(
-            username='wonderwoman', 
+            username='wonderwoman',
             password='pass'
         )
 
@@ -21,12 +21,12 @@ class CompanyListViewTests(APITestCase):
         self.client.login(username='wonderwoman', password='pass')
         response = self.client.post(
             '/companies/',
-            {   'name': 'company name',
+            {
+                'name': 'company name',
                 'excerpt': 'company excerpt',
                 'description': 'company description',
             },
         )
-        
         count = Company.objects.count()
         self.assertEqual(count, 1)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
@@ -34,6 +34,7 @@ class CompanyListViewTests(APITestCase):
     def test_user_not_logged_in_cant_create_company(self):
         response = self.client.post('/companies/', {'name': 'company name'})
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
 
 class CompanyDetailViewTests(APITestCase):
     def setUp(self):
@@ -46,13 +47,13 @@ class CompanyDetailViewTests(APITestCase):
             password='pass'
         )
         Company.objects.create(
-            owner=wonderwoman, 
+            owner=wonderwoman,
             name='company name',
             excerpt='wonderwomans excerpt',
             description='wonderwomans company description'
         )
         Company.objects.create(
-            owner=storm, 
+            owner=storm,
             name='another company name',
             excerpt='storms excerpt',
             description='storms company description'

@@ -15,9 +15,10 @@ class ProfileList(APIView):
     def get(self, request):
         profiles = Profile.objects.all()
         serializer = ProfileSerializer(
-            profiles, many= True, context={'request': request}
+            profiles, many=True, context={'request': request}
         )
         return Response(serializer.data)
+
 
 class ProfileDetail(APIView):
     """
@@ -52,5 +53,4 @@ class ProfileDetail(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Reponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

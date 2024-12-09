@@ -11,16 +11,16 @@ class CompanyList(APIView):
     """
     List all companies.
     """
-    
+
     serializer_class = CompanySerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
     ]
-    
+
     def get(self, request):
         companies = Company.objects.all()
         serializer = CompanySerializer(
-            companies, many= True, context={'request': request}
+            companies, many=True, context={'request': request}
         )
         return Response(serializer.data)
 
@@ -36,6 +36,7 @@ class CompanyList(APIView):
         return Response(
             serializer.errors, status=status.HTTP_400_BAD_REQUEST
         )
+
 
 class CompanyDetail(APIView):
     """

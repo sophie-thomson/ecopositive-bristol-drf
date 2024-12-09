@@ -9,13 +9,13 @@ class Company(models.Model):
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     logo = models.ImageField(
-        upload_to='images/', default='../default_logo_keaza8', 
+        upload_to='images/', default='../default_logo_keaza8',
         blank=True
     )
     name = models.CharField(max_length=250, unique=True)
     website_url = models.URLField(
-        max_length=250, 
-        null=True, 
+        max_length=250,
+        null=True,
         blank=True
     )
     excerpt = models.CharField(max_length=500)
