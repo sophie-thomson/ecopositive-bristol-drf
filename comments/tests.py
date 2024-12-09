@@ -120,6 +120,7 @@ class CommentDetailViewTests(APITestCase):
         wonderwoman = User.objects.get(username='wonderwoman')
         company = Company.objects.get(name='company name')
         self.client.login(username='wonderwoman', password='pass')
+
         Comment.objects.create(
             owner=wonderwoman,
             company=company,
@@ -139,6 +140,7 @@ class CommentDetailViewTests(APITestCase):
     def test_user_cant_update_another_users_comment(self):
         wonderwoman = User.objects.get(username='wonderwoman')
         company = Company.objects.get(name='company name')
+
         Comment.objects.create(
             owner=wonderwoman,
             company=company,
