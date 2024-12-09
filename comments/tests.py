@@ -68,7 +68,7 @@ class CommentListViewTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
 
-class CompanyDetailViewTests(APITestCase):
+class CommentDetailViewTests(APITestCase):
     """
     Tests that the user can view a particular comment,
     edit a comment when logged in as the comment owner,
