@@ -16,8 +16,6 @@ class CompanyListViewTests(APITestCase):
         Company.objects.create(owner=wonderwoman, name='company name')
         response = self.client.get('/companies/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        print(response.data)
-        print(len(response.data))
 
     def test_logged_in_user_can_create_company(self):
         self.client.login(username='wonderwoman', password='pass')
@@ -28,7 +26,7 @@ class CompanyListViewTests(APITestCase):
                 'description': 'company description',
             },
         )
-        print(f"Response data: {response.data}")
+        
         count = Company.objects.count()
         self.assertEqual(count, 1)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)

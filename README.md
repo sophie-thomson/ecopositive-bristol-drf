@@ -43,6 +43,10 @@ Users are invited to sign up to endorse the companies that they support and comm
 
 ### Automated Testing
 
+Each resource in the API has been tested using the REST built-in APITestCase functionality. Tests are written in a tests.py file within each app directory. 
+
+Each test is manually checked by forcing a controlled fail by using an incorrect status code and ensuring that this is the only reason the test fails. The status code is then updated and the test run again to ensure it passes with the expected status code.  
+
 ***Companies***
 
 - **CompanyListViewTests**
