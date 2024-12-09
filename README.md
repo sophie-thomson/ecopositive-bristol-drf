@@ -59,3 +59,13 @@ Each test is manually checked by forcing a controlled fail by using an incorrect
   - test_cant_retrieve_company_using_invalid_id
   - test_user_can_update_own_company
   - test_user_cant_update_another_users_company
+
+***Comments***
+
+- **CommentListViewTests**
+  - test_can_list_all_comments
+  - test_logged_in_user_can_create_comment
+  - test_user_not_logged_in_cant_create_comment
+
+- **CommentDetailViewTests**
+  - 
