@@ -12,16 +12,13 @@ class Credential(models.Model):
     name = models.CharField(max_length=40)
     group = models.CharField(max_length=40)
     link = models.URLField(null=True, blank=True)
-    # company = models.ManyToManyField(Company, on_delete=models.CASCADE)
+    description = models.TextField(null=True, blank=True)
+    # company = models.ForeignKey(Company, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-    content = models.TextField()
-    approved = models.BooleanField(default=True)
-    reported = models.BooleanField(default=False)
 
     class Meta:
         ordering = ['group']
-        # unique_together = ['name', 'company']
 
     def __str__(self):
-        return f'"{self.name}" - {self.companies}'
+        return f'{self.name}, ({self.group})'

@@ -21,7 +21,7 @@ class CredentialSerializer(serializers.ModelSerializer):
             'name',
             'group',
             'link',
-            'companies',
+            'description',
             'created_on',
             'updated_on',
         ]
