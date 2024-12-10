@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from credentials.models import Credential
 
 
 class Company(models.Model):
@@ -8,6 +9,7 @@ class Company(models.Model):
     Default logo set
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    company_owner = models.CharField(max_length=30, default=owner)
     logo = models.ImageField(
         upload_to='images/', default='../default_logo_keaza8',
         blank=True
@@ -20,7 +22,7 @@ class Company(models.Model):
     )
     excerpt = models.CharField(max_length=500)
     description = models.TextField()
-    # credentials = ManyToManyField(credential, )
+    credentials = models.ManyToManyField(Credential)
     created_on = models.DateField(auto_now_add=True)
     updated_on = models.DateField(auto_now_add=True)
     approved = models.BooleanField(default=False)
@@ -29,4 +31,4 @@ class Company(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
-        return f'{self.id} {self.name}'
+        return f'#{self.id} - {self.name}'
