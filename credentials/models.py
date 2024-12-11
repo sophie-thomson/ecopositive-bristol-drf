@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-# from companies.models import Company
 
 CREDENTIAL_GROUPS = [
     ("Eco-Conscious Approach", "Eco-Conscious Approach"),
@@ -24,7 +23,6 @@ class Credential(models.Model):
     group = models.CharField(choices=CREDENTIAL_GROUPS, max_length=40)
     link = models.URLField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
-    # company = models.ForeignKey(Company, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
