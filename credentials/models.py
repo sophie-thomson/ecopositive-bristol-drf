@@ -1,5 +1,5 @@
 from django.db import models
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
 # from companies.models import Company
 
 
@@ -9,7 +9,8 @@ class Credential(models.Model):
     A credential can be assigned to many companies, and one
     company can have multiple credentials.
     """
-    name = models.CharField(max_length=40)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=40, unique=True)
     group = models.CharField(max_length=40)
     link = models.URLField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
