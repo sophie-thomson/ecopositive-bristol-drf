@@ -1,81 +1,32 @@
-from django.http import Http404
-from rest_framework import status, permissions
-from rest_framework.views import APIView
-from rest_framework.response import Response
+from rest_framework import generics, permissions
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Company
 from .serializers import CompanySerializer
 
 
-class CompanyList(APIView):
+class CompanyList(generics.ListCreateAPIView):
     """
-    List all companies.
+    List all companies or if logged in, create a company to submit
+    for approval by admin.
+    The perform_create method associates the company with the logged in user.
     """
 
     serializer_class = CompanySerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
     ]
+    queryset = Company.objects.all()
 
-    def get(self, request):
-        companies = Company.objects.all()
-        serializer = CompanySerializer(
-            companies, many=True, context={'request': request}
-        )
-        return Response(serializer.data)
-
-    def post(self, request):
-        serializer = CompanySerializer(
-            data=request.data, context={'request': request}
-        )
-        if serializer.is_valid():
-            serializer.save(owner=request.user)
-            return Response(
-                serializer.data, status=status.HTTP_201_CREATED
-            )
-        return Response(
-            serializer.errors, status=status.HTTP_400_BAD_REQUEST
-        )
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
-class CompanyDetail(APIView):
+class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
     """
-    Retrieve or update a profile if you're the owner.
+    Retrieve, update or delete a company listing if you are the owner.
     """
     # creates form for admin editing matching to serializer fields
     serializer_class = CompanySerializer
     # Sets the permission classes attribute
     permission_classes = [IsOwnerOrReadOnly]
-
-    def get_object(self, pk):
-        try:
-            company = Company.objects.get(pk=pk)
-            # Checks permissions before returning an instance
-            self.check_object_permissions(self.request, company)
-            return company
-        except Company.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk):
-        company = self.get_object(pk)
-        serializer = CompanySerializer(
-            company, context={'request': request}
-        )
-        return Response(serializer.data)
-
-    def put(self, request, pk):
-        company = self.get_object(pk)
-        serializer = CompanySerializer(
-            company, data=request.data, context={'request': request}
-        )
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request, pk):
-        company = self.get_object(pk)
-        company.delete()
-        return Response(
-            status=status.HTTP_204_NO_CONTENT
-        )
+    queryset = Company.objects.all()

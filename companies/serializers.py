@@ -34,6 +34,7 @@ class CompanySerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'owner',
+            'is_owner',
             'profile_id',
             'profile_image',
             'name',
@@ -48,5 +49,4 @@ class CompanySerializer(serializers.ModelSerializer):
             'role',
             'created_on',
             'updated_on',
-            'is_owner',
         ]

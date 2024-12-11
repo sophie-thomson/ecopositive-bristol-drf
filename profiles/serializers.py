@@ -1,16 +1,31 @@
 from rest_framework import serializers
 from .models import Profile
+# from endorsements.models import Endorsement
 
 
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
+    # endorser_id = serializers.SerializerMethodField()
+    # companies_count = serializers.ReadOnlyField()
+    # endorsements_count = serializers.ReadOnlyField()
+    # endorser_count = serializers.ReadOnlyField()
+    # endorsed_id = serializers.SerializerMethodField()
 
     def get_is_owner(self, obj):
-        # context passed to each request in get and put views
         request = self.context['request']
-        # returns true if the user is also the object's owner
         return request.user == obj.owner
+
+    # def get_endorser_id(self, obj):
+    #     user = self.context['request'].user
+    #     if user.is_authenticated:
+    #         endorser = Endorsement.objects.filter(
+    #             # should 'endorsed=obj.owner' be =obj.company?
+    #             owner=user, endorsed=obj.owner
+    #         ).first()
+    #         print(endorser)
+    #         return endorser.id if endorser else None
+    #     return None
 
     class Meta:
         model = Profile

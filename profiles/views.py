@@ -1,56 +1,37 @@
-from django.http import Http404
-from rest_framework import status
-from rest_framework.views import APIView
-from rest_framework.response import Response
+# from django.db.models import Count
+from rest_framework import generics
+# from django_filters.rest_framework import DjangoFilterBackend
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Profile
 from .serializers import ProfileSerializer
 
 
-class ProfileList(APIView):
+class ProfileList(generics.ListAPIView):
     """
     List all profiles.
     No create view as profile creation is handled by django signals.
     """
-    def get(self, request):
-        profiles = Profile.objects.all()
-        serializer = ProfileSerializer(
-            profiles, many=True, context={'request': request}
-        )
-        return Response(serializer.data)
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+    # filterset_fields = [
+    #     # 'owner__endorser__endorsed__profile',
+    # ]
+
+    # ordering_fields = [
+    #     'companies_count',
+    #     'endorsements_count',
+    #     'endorsers_count',
+    #     'owner__endorser__created_at',
+    #     'owner__endorsed__created_at',
+    # ]
 
 
-class ProfileDetail(APIView):
+class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
     Retrieve or update a profile if you're the owner.
     """
-    # creates form for admin editing matching to serializer fields
-    serializer_class = ProfileSerializer
     # Sets the permission classes attribute
     permission_classes = [IsOwnerOrReadOnly]
-
-    def get_object(self, pk):
-        try:
-            profile = Profile.objects.get(pk=pk)
-            # Checks permissions before returning an instance
-            self.check_object_permissions(self.request, profile)
-            return profile
-        except Profile.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk):
-        profile = self.get_object(pk)
-        serializer = ProfileSerializer(
-            profile, context={'request': request}
-        )
-        return Response(serializer.data)
-
-    def put(self, request, pk):
-        profile = self.get_object(pk)
-        serializer = ProfileSerializer(
-            profile, data=request.data, context={'request': request}
-        )
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
