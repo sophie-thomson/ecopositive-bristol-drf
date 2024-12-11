@@ -72,3 +72,16 @@ Each test is manually checked by forcing a controlled fail by using an incorrect
   - test_cant_retrieve_comment_using_invalid_id
   - test_user_can_update_own_comment
   - test_user_cant_update_another_users_comment
+
+***Credentials***
+
+- **CredentialListViewTests**
+  - test_can_list_all_credentials
+  - test_logged_in_user_can_create_credential
+  - test_cant_create_credential_if_not_logged_in
+
+- **CredentialDetailViewTests**
+  - test_can_retrieve_credential_using_valid_id
+  - test_cant_retrieve_credential_using_invalid_id
+  - test_owner_can_update_own_credential
+  - test_cant_update_credential_logged_in_but_not_owner
