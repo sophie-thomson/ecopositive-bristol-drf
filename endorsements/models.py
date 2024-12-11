@@ -17,9 +17,6 @@ class Endorsement(models.Model):
     endorsed = models.ForeignKey(
         Company, related_name='endorsed', on_delete=models.CASCADE
     )
-    company = models.ForeignKey(
-        Company, related_name='endorsers', on_delete=models.CASCADE
-    )
 
     created_on = models.DateTimeField(auto_now_add=True)
 

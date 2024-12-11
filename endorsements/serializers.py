@@ -18,7 +18,6 @@ class EndorsementSerializer(serializers.ModelSerializer):
             'owner',
             'endorsed',
             'endorsed_name',
-            'company',
             'created_on',
         ]
 
