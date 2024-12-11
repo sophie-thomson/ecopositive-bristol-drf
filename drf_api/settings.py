@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'companies',
     'comments',
     'credentials',
+    'endorsements',
 ]
 
 MIDDLEWARE = [
