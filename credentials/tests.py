@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from .models import Credential
-# from companies.models import Company
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -21,12 +20,12 @@ class CredentialListViewTests(APITestCase):
         Credential.objects.create(
             owner=wonderwoman,
             name='Fly using superpowers',
-            group='Superheroes',
+            group='Eco-Conscious Approach',
         )
         Credential.objects.create(
             owner=wonderwoman,
             name='100% Renewable Energy',
-            group='Superheroes',
+            group='Eco-Conscious Approach',
         )
 
     def test_can_list_all_credentials(self):
@@ -43,7 +42,7 @@ class CredentialListViewTests(APITestCase):
             '/credentials/',
             {
                 'name': 'another credential',
-                'group': 'Superheroes',
+                'group': 'Eco-Conscious Approach',
             }
         )
         count = Credential.objects.count()
@@ -56,7 +55,7 @@ class CredentialListViewTests(APITestCase):
             '/credentials/',
             {
                 'name': 'another credential',
-                'group': 'Superheroes',
+                'group': 'Eco-Conscious Approach',
             }
         )
         self.assertEqual(
@@ -82,12 +81,12 @@ class CredentialDetailViewTests(APITestCase):
         Credential.objects.create(
             owner=wonderwoman,
             name='Fly using superpowers',
-            group='Superheroes',
+            group='Eco-Conscious Approach',
         )
         Credential.objects.create(
             owner=storm,
             name='Uses wind energy',
-            group='Superheroes',
+            group='Eco-Conscious Approach',
         )
 
     def test_can_retrieve_credential_using_valid_id(self):
@@ -105,7 +104,7 @@ class CredentialDetailViewTests(APITestCase):
             '/credentials/1/',
             {
                 'name': 'Fly in a plane',
-                'group': 'Superheroes',
+                'group': 'Eco-Conscious Approach',
             }
         )
         credential = Credential.objects.filter(pk=1).first()
@@ -118,7 +117,7 @@ class CredentialDetailViewTests(APITestCase):
             '/credentials/1/',
             {
                 'name': 'Fly in a plane',
-                'group': 'Superheroes',
+                'group': 'Eco-Conscious Approach',
             }
         )
         self.assertEqual(

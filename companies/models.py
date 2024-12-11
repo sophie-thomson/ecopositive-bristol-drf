@@ -22,7 +22,7 @@ class Company(models.Model):
     )
     excerpt = models.CharField(max_length=500)
     description = models.TextField()
-    credentials = models.ManyToManyField(Credential)
+    credentials = models.ManyToManyField(Credential, blank=True)
     key_words = models.TextField(null=True, blank=True)
     contact_name = models.CharField(max_length=40)
     contact_email = models.EmailField(unique=True, max_length=250)

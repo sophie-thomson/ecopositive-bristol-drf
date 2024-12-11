@@ -6,29 +6,42 @@ from rest_framework.test import APITestCase
 
 class CompanyListViewTests(APITestCase):
     def setUp(self):
-        User.objects.create_user(
+        wonderwoman = User.objects.create_user(
             username='wonderwoman',
             password='pass'
         )
+        Company.objects.create(
+            owner=wonderwoman,
+            name='company name',
+            excerpt='wonderwomans excerpt',
+            description='wonderwomans company description',
+            contact_name='test',
+            contact_email='test@email.com',
+            role='test role',
+        )
 
     def test_can_list_companies(self):
-        wonderwoman = User.objects.get(username='wonderwoman')
-        Company.objects.create(owner=wonderwoman, name='company name')
+        self.client.login(username='wonderwoman', password='pass')
+        Company.objects.get(name='company name')
         response = self.client.get('/companies/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_logged_in_user_can_create_company(self):
         self.client.login(username='wonderwoman', password='pass')
+        Company.objects.get(name='company name')
         response = self.client.post(
             '/companies/',
             {
-                'name': 'company name',
+                'name': 'another company name',
                 'excerpt': 'company excerpt',
                 'description': 'company description',
+                'contact_name': 'test',
+                'contact_email': 'test2@email.com',
+                'role': 'test role',
             },
         )
         count = Company.objects.count()
-        self.assertEqual(count, 1)
+        self.assertEqual(count, 2)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_user_not_logged_in_cant_create_company(self):
@@ -50,13 +63,19 @@ class CompanyDetailViewTests(APITestCase):
             owner=wonderwoman,
             name='company name',
             excerpt='wonderwomans excerpt',
-            description='wonderwomans company description'
+            description='wonderwomans company description',
+            contact_name='test',
+            contact_email='test@email.com',
+            role='test role',
         )
         Company.objects.create(
             owner=storm,
             name='another company name',
             excerpt='storms excerpt',
-            description='storms company description'
+            description='storms company description',
+            contact_name='test',
+            contact_email='test2@email.com',
+            role='test role',
         )
 
     def test_can_retrieve_company_using_valid_id(self):
@@ -76,6 +95,9 @@ class CompanyDetailViewTests(APITestCase):
                 'name': 'new company name',
                 'excerpt': 'wonderwomans excerpt',
                 'description': 'wonderwomans company description',
+                'contact_name': 'test',
+                'contact_email': 'test@email.com',
+                'role': 'test role',
             },
         )
         company = Company.objects.filter(pk=1).first()
@@ -90,6 +112,9 @@ class CompanyDetailViewTests(APITestCase):
                 'name': 'new company name',
                 'excerpt': 'company excerpt',
                 'description': 'company description',
+                'contact_name': 'test',
+                'contact_email': 'test2@email.com',
+                'role': 'test role',
             },
         )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

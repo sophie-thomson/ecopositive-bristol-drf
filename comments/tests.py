@@ -22,7 +22,10 @@ class CommentListViewTests(APITestCase):
             owner=wonderwoman,
             name='company name',
             excerpt='wonderwomans excerpt',
-            description='wonderwomans company description'
+            description='wonderwomans company description',
+            contact_name='test',
+            contact_email='test@email.com',
+            role='test role',
         )
 
     def test_can_list_all_comments(self):
@@ -86,18 +89,10 @@ class CommentDetailViewTests(APITestCase):
             owner=wonderwoman,
             name='company name',
             excerpt='wonderwomans excerpt',
-            description='wonderwomans company description'
-        )
-
-        storm = User.objects.create_user(
-            username='storm',
-            password='pass'
-        )
-        Company.objects.create(
-            owner=storm,
-            name='another company name',
-            excerpt='storms excerpt',
-            description='storms company description'
+            description='wonderwomans company description',
+            contact_name='test',
+            contact_email='test@email.com',
+            role='test role',
         )
 
     def test_can_retrieve_comment_using_valid_id(self):
@@ -147,7 +142,10 @@ class CommentDetailViewTests(APITestCase):
             company=company,
             content='wonderwomans test comment'
         )
-        User.objects.get(username='storm')
+        User.objects.create_user(
+            username='storm',
+            password='pass'
+        )
         self.client.login(username='storm', password='pass')
         response = self.client.put(
             '/comments/1/',
