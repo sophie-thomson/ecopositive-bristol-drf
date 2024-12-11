@@ -6,21 +6,9 @@ from credentials.models import Credential
 class Company(models.Model):
     """
     Company model holding the company's listing details.
-    We need the related_name attribute so that django can differentiate.
-    between the 'owner' of the listing and 'company_owner' who both are
-    User model instances.
     Default logo image set.
     """
-    owner = models.ForeignKey(
-        User,
-        related_name='listing_owner',
-        on_delete=models.CASCADE
-    )
-    company_owner = models.ForeignKey(
-        User,
-        related_name='company_owner',
-        on_delete=models.CASCADE
-    )
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
     logo = models.ImageField(
         upload_to='images/',
         default='../default_logo_keaza8',

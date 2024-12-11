@@ -24,5 +24,5 @@ urlpatterns = [
     path('', include('companies.urls')),
     path('', include('comments.urls')),
     path('', include('credentials.urls')),
-    # path('', include('endorsements.urls')),
+    path('', include('endorsements.urls')),
 ]
