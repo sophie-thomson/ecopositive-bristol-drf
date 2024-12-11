@@ -41,7 +41,7 @@ class CompanySerializer(serializers.ModelSerializer):
             'website_url',
             'excerpt',
             'description',
-            # 'credentials',
+            'credentials',
             'created_on',
             'updated_on',
             'is_owner',
