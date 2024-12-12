@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Company
 from endorsements.models import Endorsement
@@ -7,9 +8,8 @@ class CompanySerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     endorsement_id = serializers.SerializerMethodField()
-    endorsing_user = serializers.ReadOnlyField(
-        source='endorsement.owner.username'
-    )
+    endorsed_company_id = serializers.SerializerMethodField()
+    endorsing_users = serializers.SerializerMethodField()
     owner_profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     owner_profile_image = serializers.ReadOnlyField(
         source='owner.profile.image.url'
@@ -47,9 +47,28 @@ class CompanySerializer(serializers.ModelSerializer):
                 owner=user, endorsed_company=obj.id
             ).first()
             # prints the first endorsement for each company instance
-            print(endorsement)
+            # print(endorsement)
             return endorsement.id if endorsement else None
         return None
+
+    def get_endorsed_company_id(self, obj):
+        company_id = Endorsement.objects.filter(
+            endorsed_company=obj.id
+        )
+        print(company_id)
+        # return company_id
+
+    # def get_endorsing_users(self, obj):
+    #     endorsements = Endorsement.objects.filter(
+    #         endorsed_company=obj.id
+    #     )
+    #     print(endorsements)
+    #     print(len(endorsements))
+
+    # **This method was written with Code Institute Tutor support 12/12/24**
+    def get_endorsing_users(self, obj):
+        users = User.objects.filter(endorsing_user__endorsed_company=obj.id)
+        return users.values('id', 'username', 'first_name', 'last_name')
 
     class Meta:
         model = Company
@@ -72,5 +91,6 @@ class CompanySerializer(serializers.ModelSerializer):
             'updated_on',
             'credentials',
             'endorsement_id',
-            'endorsing_user',
+            'endorsing_users',
+            'endorsed_company_id',
         ]
