@@ -31,7 +31,7 @@ class CompanyList(generics.ListCreateAPIView):
     filterset_fields = [
         # filter by credentials groups
         'credentials__group',
-        # user endorsed companies 
+        # user endorsed companies
         'endorsed_company__owner'
     ]
 
