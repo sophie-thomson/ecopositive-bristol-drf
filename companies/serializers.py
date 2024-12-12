@@ -7,6 +7,7 @@ class CompanySerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
     endorsing_users = serializers.SerializerMethodField()
+    endorsements_count = serializers.ReadOnlyField()
     owner_profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     owner_profile_image = serializers.ReadOnlyField(
         source='owner.profile.image.url'
@@ -59,4 +60,5 @@ class CompanySerializer(serializers.ModelSerializer):
             'updated_on',
             'credentials',
             'endorsing_users',
+            'endorsements_count',
         ]

@@ -1,4 +1,5 @@
-from rest_framework import generics, permissions
+from django.db.models import Count
+from rest_framework import generics, permissions, filters
 from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Company
 from .serializers import CompanySerializer
@@ -15,7 +16,16 @@ class CompanyList(generics.ListCreateAPIView):
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly
     ]
-    queryset = Company.objects.all()
+    queryset = Company.objects.annotate(
+        endorsements_count=Count('endorsed_company__owner', distinct=True),
+    ).order_by('-created_on')
+
+    filter_backends = [
+        filters.OrderingFilter
+    ]
+    ordering_fields = [
+        'endorsements_count',
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -29,4 +39,6 @@ class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = CompanySerializer
     # Sets the permission classes attribute
     permission_classes = [IsOwnerOrReadOnly]
-    queryset = Company.objects.all()
+    queryset = Company.objects.annotate(
+        endorsements_count=Count('endorsed_company__owner', distinct=True),
+    ).order_by('-created_on')
