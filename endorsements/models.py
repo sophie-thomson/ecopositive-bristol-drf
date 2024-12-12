@@ -12,17 +12,17 @@ class Endorsement(models.Model):
     the same company.
     """
     owner = models.ForeignKey(
-        User, related_name='endorser', on_delete=models.CASCADE
+        User, related_name='endorsing_user', on_delete=models.CASCADE
     )
-    endorsed = models.ForeignKey(
-        Company, related_name='endorsed', on_delete=models.CASCADE
+    endorsed_company = models.ForeignKey(
+        Company, related_name='endorsed_company', on_delete=models.CASCADE
     )
 
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ['-created_on']
-        unique_together = ['owner', 'endorsed']
+        unique_together = ['owner', 'endorsed_company']
 
     def __str__(self):
-        return f'{self.owner} {self.endorsed}'
+        return f'{self.owner} {self.endorsed_company}'
