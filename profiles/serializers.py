@@ -5,6 +5,7 @@ from .models import Profile
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
+    endorsements_count = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -21,4 +22,5 @@ class ProfileSerializer(serializers.ModelSerializer):
             'first_name',
             'last_name',
             'image',
+            'endorsements_count',
         ]
