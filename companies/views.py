@@ -18,6 +18,7 @@ class CompanyList(generics.ListCreateAPIView):
     ]
     queryset = Company.objects.annotate(
         endorsements_count=Count('endorsed_company__owner', distinct=True),
+        comments_count=Count('comment', distinct=True),
     ).order_by('-created_on')
 
     filter_backends = [
@@ -25,6 +26,7 @@ class CompanyList(generics.ListCreateAPIView):
     ]
     ordering_fields = [
         'endorsements_count',
+        'comments_count'
     ]
 
     def perform_create(self, serializer):
@@ -41,4 +43,5 @@ class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsOwnerOrReadOnly]
     queryset = Company.objects.annotate(
         endorsements_count=Count('endorsed_company__owner', distinct=True),
+        comments_count=Count('comment', distinct=True),
     ).order_by('-created_on')
