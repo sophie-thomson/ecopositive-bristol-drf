@@ -22,11 +22,20 @@ class CompanyList(generics.ListCreateAPIView):
     ).order_by('-created_on')
 
     filter_backends = [
-        filters.OrderingFilter
+        filters.OrderingFilter,
+        filters.SearchFilter,
     ]
+
+    search_fields = [
+        'name',
+        'key_words',
+        'excerpt',
+    ]
+
     ordering_fields = [
         'endorsements_count',
-        'comments_count'
+        'comments_count',
+        'credentials__group',
     ]
 
     def perform_create(self, serializer):
