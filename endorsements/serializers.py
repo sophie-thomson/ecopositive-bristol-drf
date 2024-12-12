@@ -25,7 +25,16 @@ class EndorsementSerializer(serializers.ModelSerializer):
         ]
 
     def create(self, validated_data):
-        try:
-            return super().create(validated_data)
-        except IntegrityError:
-            raise serializers.ValidationError({'detail': 'possible duplicate'})
+        user = self.context['request'].user
+        endorsed_company_owner = 'endorsed_company.owner'
+        if user == endorsed_company_owner:
+            raise serializers.ValidationError({
+                'detail': 'You cannot endorse your own company'
+            })
+        else:
+            try:
+                return super().create(validated_data)
+            except IntegrityError:
+                raise serializers.ValidationError({
+                    'detail': 'possible duplicate'
+                })
