@@ -35,4 +35,4 @@ class Company(models.Model):
         ordering = ['created_on']
 
     def __str__(self):
-        return f'#{self.id} - {self.name}'
+        return f'#{self.id} ({self.name})'
