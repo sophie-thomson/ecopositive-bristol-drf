@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import re
 
 if os.path.exists('env.py'):
     import env
@@ -65,8 +66,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = [
+    os.environ.get('ALLOWED_HOST'),
     '8000-sophiethoms-ecopositive-nmek1gobu21.ws.codeinstitute-ide.net',
-    'ecopositive-api-pp5-ba0d580957dc.herokuapp.com',
 ]
 
 
@@ -116,7 +117,8 @@ if 'CLIENT_ORIGIN' in os.environ:
     CORS_ALLOWED_ORIGINS = [
         os.environ.get('CLIENT_ORIGIN')
     ]
-else:
+
+if 'CLIENT_ORIGIN_DEV' in os.environ:
     CORS_ALLOWED_ORIGIN_REGEXES = [
         r"^https:\/\/.*\.codeinstitute-ide\.net$",
     ]
