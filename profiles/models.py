@@ -8,7 +8,7 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=25)
     last_name = models.CharField(max_length=25, blank=True)
     image = models.ImageField(
-        upload_to='images/', default='../default_profile_pbuspe'
+        upload_to='images/', default='../default_profile_hcui3f'
     )
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
