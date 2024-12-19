@@ -8,11 +8,6 @@ class CredentialSerializer(serializers.ModelSerializer):
     Serializer for the Credential model
     """
     owner = serializers.ReadOnlyField(source='owner.username')
-    is_owner = serializers.SerializerMethodField()
-
-    def get_is_owner(self, obj):
-        request = self.context['request']
-        return request.user == obj.owner
 
     def get_created_on(self, obj):
         return naturaltime(obj.created_on)
@@ -25,7 +20,6 @@ class CredentialSerializer(serializers.ModelSerializer):
         fields = [
             'id',
             'owner',
-            'is_owner',
             'name',
             'group',
             'link',
