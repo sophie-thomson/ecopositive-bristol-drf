@@ -14,9 +14,7 @@ class CompanyList(generics.ListCreateAPIView):
     """
 
     serializer_class = CompanySerializer
-    permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly
-    ]
+    # No permissions set as all users can view the list of companies
     queryset = Company.objects.annotate(
         endorsements_count=Count('endorsed_company__owner', distinct=True),
         comments_count=Count('comment', distinct=True),
@@ -58,7 +56,7 @@ class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
     # creates form for admin editing matching to serializer fields
     serializer_class = CompanySerializer
     # Sets the permission classes attribute
-    # permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     queryset = Company.objects.annotate(
         endorsements_count=Count('endorsed_company__owner', distinct=True),
         comments_count=Count('comment', distinct=True),
