@@ -19,13 +19,13 @@ class CompanySerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 'Image size too large, please use an image smaller than 2MB'
             )
-        if value.image.width > 1500:
+        if value.image.width > 800:
             raise serializers.ValidationError(
-                'Image width must be less than 1500px'
+                'Image width must be less than 800px'
             )
-        if value.image.height > 1500:
+        if value.image.height > 800:
             raise serializers.ValidationError(
-                'Image height must be less than 1500px'
+                'Image height must be less than 800px'
             )
         return value
 
