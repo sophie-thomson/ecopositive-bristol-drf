@@ -41,7 +41,7 @@ class CompanySerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         if user.is_authenticated:
             endorsement = Endorsement.objects.filter(
-                owner=user, company=obj
+                owner=user, endorsed_company=obj
             ).first()
             return endorsement.id if endorsement else None
         return None
