@@ -67,5 +67,6 @@ class CompanySerializer(serializers.ModelSerializer):
             'credentials',
             'endorsing_users',
             'endorsements_count',
+            'endorsement_id',
             'comments_count',
         ]
