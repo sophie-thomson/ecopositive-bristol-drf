@@ -8,6 +8,7 @@ class CompanySerializer(serializers.ModelSerializer):
     is_owner = serializers.SerializerMethodField()
     endorsing_users = serializers.SerializerMethodField()
     endorsements_count = serializers.ReadOnlyField()
+    endorsement_id = serializers.SerializerMethodField()
     comments_count = serializers.ReadOnlyField()
     owner_profile_id = serializers.ReadOnlyField(source='owner.profile.id')
     owner_profile_image = serializers.ReadOnlyField(
