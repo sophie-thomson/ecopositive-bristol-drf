@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from .models import Company
+from endorsements.models import Endorsement
 
 
 class CompanySerializer(serializers.ModelSerializer):
@@ -35,6 +36,15 @@ class CompanySerializer(serializers.ModelSerializer):
         request = self.context['request']
         # returns true if the user is == the company's owner
         return request.user == obj.owner
+
+    def get_endorsement_id(self, obj):
+        user = self.context['request'].user
+        if user.is_authenticated:
+            endorsement = Endorsement.objects.filter(
+                owner=user, company=obj
+            ).first()
+            return endorsement.id if endorsement else None
+        return None
 
     # **This method was written with Code Institute Tutor support 12/12/24**
     def get_endorsing_users(self, obj):
