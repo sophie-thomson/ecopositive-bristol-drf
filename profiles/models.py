@@ -5,12 +5,12 @@ from django.contrib.auth.models import User
 
 class Profile(models.Model):
     owner = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=25)
+    first_name = models.CharField(max_length=25, blank=True)
     last_name = models.CharField(max_length=25, blank=True)
     image = models.ImageField(
         upload_to='images/', default='../default_profile_hcui3f'
     )
-    is_staff = models.BooleanField(User, default=False)
+    admin_access = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
