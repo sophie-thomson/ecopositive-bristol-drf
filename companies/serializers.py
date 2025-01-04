@@ -49,7 +49,7 @@ class CompanySerializer(serializers.ModelSerializer):
     # **This method was written with Code Institute Tutor support 12/12/24**
     def get_endorsing_users(self, obj):
         users = User.objects.filter(endorsing_user__endorsed_company=obj.id)
-        return users.values('id', 'username', 'first_name', 'last_name')
+        return users.values('id', 'username')
 
     class Meta:
         model = Company
@@ -79,4 +79,5 @@ class CompanySerializer(serializers.ModelSerializer):
             'endorsements_count',
             'endorsement_id',
             'comments_count',
+            'approved',
         ]
