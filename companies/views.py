@@ -54,7 +54,7 @@ class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
     Retrieve, update or delete a company listing if you are the owner.
     """
     serializer_class = CompanySerializer
-    permission_classes = [IsOwnerOrReadOnly, IsAdminOrReadOnly,]
+    permission_classes = [IsAdminOrReadOnly, IsOwnerOrReadOnly,]
     queryset = Company.objects.annotate(
         endorsements_count=Count('endorsed_company__owner', distinct=True),
         comments_count=Count('comment', distinct=True),
