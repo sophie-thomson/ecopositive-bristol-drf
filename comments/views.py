@@ -1,6 +1,6 @@
 from rest_framework import generics, permissions
 from django_filters.rest_framework import DjangoFilterBackend
-from drf_api.permissions import IsOwnerOrReadOnly
+from drf_api.permissions import IsOwnerOrReadOnly, IsAdminOrReadOnly
 from .models import Comment
 from .serializers import CommentSerializer, CommentDetailSerializer
 
@@ -29,6 +29,6 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     """
     Retrieve a comment, or update or delete it by id if you own it.
     """
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly, IsAdminOrReadOnly]
     serializer_class = CommentDetailSerializer
     queryset = Comment.objects.all()
