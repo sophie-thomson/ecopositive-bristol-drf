@@ -15,6 +15,7 @@ class CompanySerializer(serializers.ModelSerializer):
     owner_profile_image = serializers.ReadOnlyField(
         source='owner.profile.image.url'
     )
+    is_staff = serializers.SerializerMethodField()
 
     def validate_logo(self, value):
         if value.size > 1024 * 1024 * 2:
@@ -36,6 +37,10 @@ class CompanySerializer(serializers.ModelSerializer):
         request = self.context['request']
         # returns true if the user is == the company's owner
         return request.user == obj.owner
+
+    def get_is_staff(self, obj):
+        request = self.context['request']
+        return request.user.is_staff
 
     def get_endorsement_id(self, obj):
         user = self.context['request'].user
@@ -80,4 +85,5 @@ class CompanySerializer(serializers.ModelSerializer):
             'endorsement_id',
             'comments_count',
             'approved',
+            'is_staff',
         ]

@@ -14,12 +14,17 @@ class CommentSerializer(serializers.ModelSerializer):
     profile_image = serializers.ReadOnlyField(source='owner.profile.image.url')
     created_on = serializers.SerializerMethodField()
     updated_on = serializers.SerializerMethodField()
+    is_staff = serializers.SerializerMethodField()
     # approved = serializers.ReadOnlyField()
     # reported = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
         request = self.context['request']
         return request.user == obj.owner
+
+    def get_is_staff(self, obj):
+        request = self.context['request']
+        return request.user.is_staff
 
     def get_created_on(self, obj):
         return naturaltime(obj.created_on)
@@ -41,6 +46,7 @@ class CommentSerializer(serializers.ModelSerializer):
             'content',
             'approved',
             'reported',
+            'is_staff',
         ]
 
 
