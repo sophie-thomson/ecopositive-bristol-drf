@@ -1,7 +1,7 @@
 from django.db.models import Count
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
-from drf_api.permissions import IsOwnerOrReadOnly
+from drf_api.permissions import IsOwnerOrReadOnly, IsAdminOrReadOnly
 from .models import Company
 from .serializers import CompanySerializer
 
@@ -54,7 +54,7 @@ class CompanyDetail(generics.RetrieveUpdateDestroyAPIView):
     Retrieve, update or delete a company listing if you are the owner.
     """
     serializer_class = CompanySerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsOwnerOrReadOnly, IsAdminOrReadOnly]
     queryset = Company.objects.annotate(
         endorsements_count=Count('endorsed_company__owner', distinct=True),
         comments_count=Count('comment', distinct=True),
