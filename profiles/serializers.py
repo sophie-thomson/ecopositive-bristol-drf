@@ -5,7 +5,6 @@ from .models import Profile
 class ProfileSerializer(serializers.ModelSerializer):
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
-    admin_access = serializers.ReadOnlyField()
     endorsements_count = serializers.ReadOnlyField()
     is_staff = serializers.SerializerMethodField()
 
@@ -23,7 +22,6 @@ class ProfileSerializer(serializers.ModelSerializer):
             'id',
             'owner',
             'is_owner',
-            'admin_access',
             'created_on',
             'updated_on',
             'first_name',
