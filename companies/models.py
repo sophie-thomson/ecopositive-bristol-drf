@@ -16,12 +16,13 @@ class Company(models.Model):
         size=[300, 300],
         quality=75,
         force_format="WEBP",
+        blank=True,
     )
     name = models.CharField(max_length=250, unique=True)
     website_url = models.URLField(
         max_length=250,
         null=True,
-        blank=True
+        blank=True,
     )
     excerpt = models.CharField(max_length=500)
     description = models.TextField()

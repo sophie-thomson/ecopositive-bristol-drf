@@ -133,14 +133,15 @@ class CommentDetailViewTests(APITestCase):
         self.assertEqual(comment.content, 'updated comment content')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_user_cant_update_another_users_comment(self):
+    def test_logged_in_user_can_report_another_users_comment(self):
         wonderwoman = User.objects.get(username='wonderwoman')
         company = Company.objects.get(name='company name')
 
         Comment.objects.create(
             owner=wonderwoman,
             company=company,
-            content='wonderwomans test comment'
+            content='wonderwomans test comment',
+            reported=False
         )
         User.objects.create_user(
             username='storm',
@@ -151,7 +152,32 @@ class CommentDetailViewTests(APITestCase):
             '/comments/1/',
             {
                 'company': 1,
-                'content': 'storms updated comment',
+                'content': 'wonderwomans test comment',
+                'reported': True,
+            },
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_user_not_logged_in_cant_report_another_users_comment(self):
+        wonderwoman = User.objects.get(username='wonderwoman')
+        company = Company.objects.get(name='company name')
+
+        Comment.objects.create(
+            owner=wonderwoman,
+            company=company,
+            content='wonderwomans test comment',
+            reported=False
+        )
+        User.objects.create_user(
+            username='storm',
+            password='pass'
+        )
+        response = self.client.put(
+            '/comments/1/',
+            {
+                'company': 1,
+                'content': 'wonderwomans test comment',
+                'reported': True,
             },
         )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)

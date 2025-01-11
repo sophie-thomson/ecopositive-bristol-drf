@@ -71,7 +71,8 @@ Each test is manually checked by forcing a controlled fail by using an incorrect
   - test_can_retrieve_comment_using_valid_id
   - test_cant_retrieve_comment_using_invalid_id
   - test_user_can_update_own_comment
-  - test_user_cant_update_another_users_comment
+  - test_user_can_report_another_users_comment
+  - test_user_not_logged_in_cant_report_another_users_comment
 
 ***Credentials***
 

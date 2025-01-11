@@ -15,8 +15,6 @@ class CommentSerializer(serializers.ModelSerializer):
     created_on = serializers.SerializerMethodField()
     updated_on = serializers.SerializerMethodField()
     is_staff = serializers.SerializerMethodField()
-    # approved = serializers.ReadOnlyField()
-    # reported = serializers.ReadOnlyField()
 
     def get_is_owner(self, obj):
         request = self.context['request']
