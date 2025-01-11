@@ -37,6 +37,7 @@ class CompanyList(generics.ListCreateAPIView):
         'name',
         'key_words',
         'excerpt',
+        'credentials__group',
     ]
 
     ordering_fields = [
