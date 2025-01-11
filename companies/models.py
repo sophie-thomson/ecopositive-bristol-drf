@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from credentials.models import Credential
+from django_resized import ResizedImageField
 
 
 class Company(models.Model):
@@ -9,10 +10,12 @@ class Company(models.Model):
     Default logo image set.
     """
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    logo = models.ImageField(
+    logo = ResizedImageField(
         upload_to='images/',
         default='../default_logo_keaza8',
-        blank=True
+        size=[300, 300],
+        quality=75,
+        force_format="WEBP",
     )
     name = models.CharField(max_length=250, unique=True)
     website_url = models.URLField(
