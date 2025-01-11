@@ -44,7 +44,7 @@ class CommentListViewTests(APITestCase):
         )
         response = self.client.get('/comments/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), 2)
+        self.assertEqual(len(response.data['results']), 2)
 
     def test_logged_in_user_can_create_comment(self):
         self.client.login(username='wonderwoman', password='pass')
