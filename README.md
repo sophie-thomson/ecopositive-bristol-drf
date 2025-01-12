@@ -253,8 +253,8 @@ Cloudinary is connected to the api and to the front end UI via the Heroku Config
 A new secret key was created using a [Django Secret Key Generator](https://djecrety.ir/) and this was stored in the env.py file so that it is not available publicly in GitHub or in the deployed build. 
 
 ## Python Packages
-<details open>
-<summary> Details of packages </summary>
+
+Packages used in this build:
 
 * dj-database-url==0.5.0
     * Used to parse the DATABASE_URL connection settings
@@ -465,4 +465,4 @@ The steps to deploy to Heroku are as follows:
 - Stack Overflow [Django: Safely Remove Old Migrations?](https://stackoverflow.com/questions/58000680/django-safely-remove-old-migrations) was used to help with rolling back migrations when making changes to models
   - [Django REST framework documentation](https://www.django-rest-framework.org/api-guide/serializers/#saving-instances) to help with Serializers for use of def create(self, validated_data) in endorsements
 - CI Tutor Support helped to resolve BUG #57 Serializer to retrieve endorsing users for a company not working.
-
+- My mentor's PP5 README for [Body Doodles API](https://github.com/Gareth-McGirr/body-doodles-api/blob/main/README.md) was used as reference for this document.
