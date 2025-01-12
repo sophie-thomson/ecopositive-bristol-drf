@@ -10,7 +10,7 @@ Business owners are invited to list their company or business and highlight thei
 
 All users are able to view the directory and see the company details so they can find an ecoPositive business whether they sign up or not. User are invited to sign up to endorse the companies that they support and comment on listed businesses so that other visitors to the site can see which businesses are popular.
 
-![Placeholder mock up on multiple devices](placeholder image)
+![Screenshot of deployed api admin panel](docs/readme-images/drf-api-admin.png)
 
 ## Planning
 
@@ -208,11 +208,18 @@ Endpoint - *endorsements/<int:pk>/*
 
 ### Eco-Credentials
 
-Having built the framework for holding the required data sets, I researched the various ways in which a company or business might be able to validate their ecoPsositive actiions or products. A list of 50 potential eco-credentials were drafted in an excel spreadsheet and grouped unmder four main headings:
+Having built the framework for holding the required data sets, I researched the various ways in which a company or business might be able to validate their ecoPsositive actiions or products. 
+
+A list of 50 potential eco-credentials were drafted in an excel spreadsheet and grouped unmder four main headings:
+
   - Eco-Conscious Approach
   - Membership / Accreditation
   - Socially Responsible
   - Sustainable Methods / Materials
+
+These credentials have been added to the api and are managed from within the admin panel for staff with superuser access or the owner (as these were added by a superuser, the owner is both).
+
+The filter and search fields in the companies views.py file enable companies to be filtered according to the credentials group that they have eco-credentials assigned under.
 
 ![Screenshot of eco-credentials spreadsheet](docs/readme-images/credentials-list.png)
 
@@ -459,4 +466,3 @@ The steps to deploy to Heroku are as follows:
   - [Django REST framework documentation](https://www.django-rest-framework.org/api-guide/serializers/#saving-instances) to help with Serializers for use of def create(self, validated_data) in endorsements
 - CI Tutor Support helped to resolve BUG #57 Serializer to retrieve endorsing users for a company not working.
 
-   
