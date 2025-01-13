@@ -2,13 +2,15 @@
 
 This is the backend service used by the [ecoPositive Bristol](https://ecopositive-react-pp5-0012331e7023.herokuapp.com/) application.
 
-The goal of this API is to provide the backend data framework which communicates with the front end REACT User Interface enabling users to create, read, update and delete data associated with the application.
+The goal of the [ecoPositive Django REST Framework API](https://ecopositive-api-pp5-ba0d580957dc.herokuapp.com/admin/) is to provide the backend data framework which communicates with the front end REACT User Interface enabling users to create, read, update and delete data associated with the application.
 
-[ecoPositive Bristol](https://tastesensation-pp4-54d01fbc1628.herokuapp.com/) is a one stop directory championing Bristol’s eco-conscious and socially responsible businesses.
+[ecoPositive Bristol](https://ecopositive-react-pp5-0012331e7023.herokuapp.com/) is a one stop directory championing Bristol’s eco-conscious and socially responsible businesses.
 
 Business owners are invited to list their company or business and highlight their eco-positive credentials from a list of 50 pre-determined options listed under group headings.
 
-All users are able to view the directory and see the company details so they can find an ecoPositive business whether they sign up or not. User are invited to sign up to endorse the companies that they support and comment on listed businesses so that other visitors to the site can see which businesses are popular.
+All users are able to view the directory and see the company details so they can find an ecoPositive business whether they sign up or not.
+
+Users are invited to sign up to endorse the companies that they support and comment on listed businesses so that other visitors to the site can see which businesses are popular.
 
 ![Screenshot of deployed api admin panel](docs/readme-images/drf-api-admin.png)
 
