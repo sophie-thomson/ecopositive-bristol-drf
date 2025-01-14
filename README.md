@@ -460,7 +460,6 @@ The steps to deploy to Heroku are as follows:
 
 ## Credits & References
 
-## References
 - The CI Django REST Framework walkthrough project for 'Moments' was used as a reference when building the inital project in django and the basis for the company, profile and comment models and views.
 - [Django REST framework documentation](https://www.django-rest-framework.org/api-guide/testing/#api-test-cases) - Was used to elp devise the tests for the comments resource in REST api.
 - Medium article [How to write test cases for Django Rest Framework Applications](https://rajansahu713.medium.com/mastering-the-art-of-django-test-cases-fa7b0322c9fb) was used as further reference for writing API Test cases.
