@@ -128,8 +128,8 @@ if 'CLIENT_ORIGIN_DEV' in os.environ:
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://8000-sophiethoms-ecopositive-nmek1gobu21.ws.codeinstitute-ide.net',
-    'https://3000-sophiethoms-ecopositive-8oh583hupx7.ws.codeinstitute-ide.net'
+  'https://8000-sophiethoms-ecopositive-nmek1gobu21.ws.codeinstitute-ide.net',
+  'https://3000-sophiethoms-ecopositive-8oh583hupx7.ws.codeinstitute-ide.net'
 ]
 
 ROOT_URLCONF = 'drf_api.urls'
@@ -173,23 +173,24 @@ else:
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
+# Different tab spacing used to resolve 80 character linter issue.
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME':
-        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME':
-        'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME':
-        'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME':
-        'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
+  {
+    'NAME':
+    'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+  },
+  {
+    'NAME':
+    'django.contrib.auth.password_validation.MinimumLengthValidator',
+  },
+  {
+    'NAME':
+    'django.contrib.auth.password_validation.CommonPasswordValidator',
+  },
+  {
+    'NAME':
+    'django.contrib.auth.password_validation.NumericPasswordValidator',
+  },
 ]
 
 
